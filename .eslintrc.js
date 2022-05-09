@@ -28,6 +28,7 @@ module.exports = {
     ],
     'no-unused-expressions': 'off',
     'import/prefer-default-export': 'off',
+    'react/prop-types': 0,
     'prefer-destructuring': ['error', { object: true, array: false }],
     'no-param-reassign': 'off',
     'no-console': 0,
