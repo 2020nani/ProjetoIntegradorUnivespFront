@@ -6,13 +6,18 @@ import api from '../../services/api';
 
 export default function Home() {
   const [arearisco, setAreaRisco] = useState([]);
+
   useEffect(() => {
     async function loadDados() {
       const response = await api.get('api/v1/arearisco');
       setAreaRisco(response.data);
     }
     loadDados();
-  }, []);
+  }, [1]);
+
+  setInterval(() => {
+    window.location.reload(true);
+  }, 10000);
 
   return (
     <Container theme="escuro">

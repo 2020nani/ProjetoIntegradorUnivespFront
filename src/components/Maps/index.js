@@ -26,12 +26,17 @@ export const MapContainer = ({ google, arearisco }) => {
               key={area.id}
               radius={10000}
               center={{ lat: area.latitude, lng: area.longitude }}
-              onClick={() => console.log('testando')}
-              strokeColor="transparent"
+              strokeColor="#00000"
               strokeOpacity={0}
               strokeWeight={5}
-              fillColor="red"
-              fillOpacity={0.2}
+              fillColor={
+                area.nivelRisco === 'baixo'
+                  ? 'green'
+                  : area.nivelRisco === 'medio'
+                  ? 'yellow'
+                  : 'red'
+              }
+              fillOpacity={0.7}
             />
           ))}
         </Map>

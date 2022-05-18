@@ -15,14 +15,18 @@ export default function Header() {
         </ContainerGridConteudo>
         <ContainerGridConteudo size={3} align="space-around">
           <div>
+            <Link to="notificar">Enviar Notificação Risco </Link>
+          </div>
+          <div>
             <strong>{profile.nome} </strong>
           </div>
           <div>
             <strong> | </strong>
           </div>
           <div>
-            <Link to="profile"> Atendimento</Link>
+            <Link to="profile"> Perfil</Link>
           </div>
+          <div>Notificações</div>
         </ContainerGridConteudo>
       </ContainerGrid>
     </Container>
