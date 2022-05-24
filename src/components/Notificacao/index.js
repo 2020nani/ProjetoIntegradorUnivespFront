@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 
 export default function Notificacao({ isNotificacao, setIsNotificacao }) {
   const notificacoes = useSelector(state => state.notification.notifications);
-  //const [notificacoes, setNotificacoes] = useState([]);
+
   return (
     console.log(notificacoes),
     (
@@ -54,7 +54,10 @@ export default function Notificacao({ isNotificacao, setIsNotificacao }) {
               ))}
             </tbody>
           </table>
-          <button onClick={() => setIsNotificacao(!isNotificacao)}>
+          <button
+            type="button"
+            onClick={() => setIsNotificacao(!isNotificacao)}
+          >
             fechar
           </button>
         </div>

@@ -9,7 +9,7 @@ module.exports = {
     SharedArrayBuffer: 'readonly',
     __DEV__: 'readonly',
   },
-  parser: '@babel/eslint-parser',
+  // parser: '@babel/eslint-parser',
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
@@ -32,5 +32,9 @@ module.exports = {
     'prefer-destructuring': ['error', { object: true, array: false }],
     'no-param-reassign': 'off',
     'no-console': 0,
+    'object-shorthand': [0],
+    'no-nested-ternary': 0,
+    'jsx-a11y/no-static-element-interactions': 0,
+    'jsx-a11y/click-events-have-key-events': 0,
   },
 };

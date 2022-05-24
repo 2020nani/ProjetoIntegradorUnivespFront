@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import Header from '../../components/Header';
-import { useSelector } from 'react-redux';
 import Maps from '../../components/Maps';
 import { Container } from './style';
 import api from '../../services/api';
@@ -18,9 +17,9 @@ export default function Home() {
     loadDados();
   }, [1]);
 
-  /**setInterval(() => {
+  /* setInterval(() => {
     window.location.reload(true);
-  }, 10000);*/
+  }, 10000); */
 
   return (
     <Container theme="escuro">

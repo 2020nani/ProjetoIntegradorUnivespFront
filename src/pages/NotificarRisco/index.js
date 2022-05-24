@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
+import SockJsClient from 'react-stomp';
 import { Container } from './style';
 import Header from '../../components/Header';
 import { notificationReceived } from '../../store/modules/notification/actions';
 import api from '../../services/api';
-import SockJsClient from 'react-stomp';
 
 const SOCKET_URL = process.env.REACT_APP_SOCKET_URL;
 
@@ -37,7 +37,7 @@ export default function Dashboard() {
           /* funcao loga usuario */
           onSubmit={values => {
             const { cidade, regiao, descricao } = values;
-            const response = api
+            api
               .post('notificacao', {
                 cidade: cidade,
                 regiao: regiao,
@@ -45,11 +45,11 @@ export default function Dashboard() {
                 usuarioId: 1,
                 isRead: false,
               })
-              .then(response => {
-                console.log(response);
+              .then(resp => {
+                console.log(resp);
               })
               .catch(err => {
-                console.error('ops! ocorreu um erro' + err);
+                console.error(err);
               });
           }}
         >
