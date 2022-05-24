@@ -1,10 +1,15 @@
-import React, { useCallback } from 'react';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
-import useWebSocket from 'react-use-websocket';
 import { Container } from './style';
 import Header from '../../components/Header';
+import { notificationReceived } from '../../store/modules/notification/actions';
+import api from '../../services/api';
+import SockJsClient from 'react-stomp';
+
+const SOCKET_URL = process.env.REACT_APP_SOCKET_URL;
 
 const schema = Yup.object().shape({
   cidade: Yup.string().required('A cidade e obrigatório'),
@@ -16,24 +21,8 @@ const schema = Yup.object().shape({
 });
 
 export default function Dashboard() {
-  const { lastJsonMessage, sendMessage } = useWebSocket(
-    'ws://localhost:8080/ws',
-    {
-      onOpen: () => console.log(`Connected to App WS`),
-      onMessage: () => {
-        if (lastJsonMessage) {
-          console.log(lastJsonMessage);
-        }
-      },
-      onError: event => {
-        console.error(event);
-      },
-      shouldReconnect: closeEvent => true,
-      reconnectInterval: 3000,
-    }
-  );
+  const dispatch = useDispatch();
 
-  const handleClickSendMessage = useCallback(() => sendMessage('Hello'), []);
   return (
     <Container>
       <Header />
@@ -47,7 +36,21 @@ export default function Dashboard() {
           validationSchema={schema}
           /* funcao loga usuario */
           onSubmit={values => {
-            console.log('erro');
+            const { cidade, regiao, descricao } = values;
+            const response = api
+              .post('notificacao', {
+                cidade: cidade,
+                regiao: regiao,
+                descricao: descricao,
+                usuarioId: 1,
+                isRead: false,
+              })
+              .then(response => {
+                console.log(response);
+              })
+              .catch(err => {
+                console.error('ops! ocorreu um erro' + err);
+              });
           }}
         >
           {({ touched, errors }) => (
@@ -77,15 +80,25 @@ export default function Dashboard() {
                 <div>{errors.descricao}</div>
               ) : null}
 
-              <button type="button" onClick={handleClickSendMessage}>
-                Enviar Notificação
-              </button>
+              <button type="submit">Enviar Notificação</button>
 
               <Link to="/">Retornar pagina inicial</Link>
             </Form>
           )}
         </Formik>
       </div>
+      <SockJsClient
+        url={SOCKET_URL}
+        topics={['/topic/message']}
+        onConnect={console.log('CONNECTED!')}
+        onMessage={msg => dispatch(notificationReceived(msg))}
+        headers={{
+          Accept: 'application/json',
+          ContentType: 'application/json',
+          AccessControlAllowHeaders: 'XMLHttpRequest',
+        }}
+        debug={false}
+      />
     </Container>
   );
 }

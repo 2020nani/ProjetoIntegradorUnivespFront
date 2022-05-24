@@ -8,7 +8,7 @@ export default reducers => {
     {
       key: 'vanilaStore',
       storage,
-      whitelist: ['auth', 'user'],
+      whitelist: ['auth', 'user', 'notification'],
     },
     reducers
   );
