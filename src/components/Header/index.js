@@ -11,36 +11,33 @@ export default function Header({ isNotificacao, setIsNotificacao }) {
   );
 
   return (
-    console.log(count.length),
-    (
-      <Container>
-        <ContainerGrid>
-          <ContainerGridConteudo size={1} align="flex-start">
-            <div>
-              <strong>logo</strong>
+    <Container>
+      <ContainerGrid>
+        <ContainerGridConteudo size={1} align="flex-start">
+          <div>
+            <strong>logo</strong>
+          </div>
+        </ContainerGridConteudo>
+        <ContainerGridConteudo size={3} align="space-around">
+          <div>
+            <Link to="notificar">Enviar Notificação Risco </Link>
+          </div>
+          <div>
+            <strong>{profile.nome} </strong>
+          </div>
+          <div>
+            <strong> | </strong>
+          </div>
+          <div>
+            <Link to="profile"> Perfil</Link>
+          </div>
+          {!isNotificacao && (
+            <div onClick={() => setIsNotificacao(!isNotificacao)}>
+              Notificações <span>{count.length}</span>
             </div>
-          </ContainerGridConteudo>
-          <ContainerGridConteudo size={3} align="space-around">
-            <div>
-              <Link to="notificar">Enviar Notificação Risco </Link>
-            </div>
-            <div>
-              <strong>{profile.nome} </strong>
-            </div>
-            <div>
-              <strong> | </strong>
-            </div>
-            <div>
-              <Link to="profile"> Perfil</Link>
-            </div>
-            {!isNotificacao && (
-              <div onClick={() => setIsNotificacao(!isNotificacao)}>
-                Notificações <span>{count.length}</span>
-              </div>
-            )}
-          </ContainerGridConteudo>
-        </ContainerGrid>
-      </Container>
-    )
+          )}
+        </ContainerGridConteudo>
+      </ContainerGrid>
+    </Container>
   );
 }

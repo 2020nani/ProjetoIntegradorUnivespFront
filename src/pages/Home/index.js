@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import SockJsClient from 'react-stomp';
 import Header from '../../components/Header';
 import Maps from '../../components/Maps';
 import { Container } from './style';
@@ -6,6 +7,7 @@ import api from '../../services/api';
 import Notificacao from '../../components/Notificacao';
 
 export default function Home() {
+  const SOCKET_URL = process.env.REACT_APP_SOCKET_URL;
   const [arearisco, setAreaRisco] = useState([]);
   const [isNotificacao, setIsNotificacao] = useState(false);
 
@@ -16,10 +18,6 @@ export default function Home() {
     }
     loadDados();
   }, [1]);
-
-  /* setInterval(() => {
-    window.location.reload(true);
-  }, 10000); */
 
   return (
     <Container theme="escuro">
@@ -34,6 +32,13 @@ export default function Home() {
           setIsNotificacao={setIsNotificacao}
         />
       )}
+      <SockJsClient
+        url={SOCKET_URL}
+        topics={['/topic/area']}
+        onConnect={console.log('CONNECTED!')}
+        onMessage={msg => setAreaRisco(msg)}
+        debug={false}
+      />
     </Container>
   );
 }

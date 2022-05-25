@@ -58,7 +58,7 @@ export default function SignUp() {
             )}
           </Formik>
           <span>Já tem uma conta?</span>
-          <Link to="/login">
+          <Link to="/">
             <span style={{ color: 'orange' }}>Faça Login!</span>
           </Link>
         </div>
