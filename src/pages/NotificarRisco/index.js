@@ -46,7 +46,7 @@ export default function Dashboard() {
             }}
             validationSchema={schema}
             /* funcao loga usuario */
-            onSubmit={values => {
+            onSubmit={(values, { resetForm }) => {
               const { cidade, regiao, descricao } = values;
               api
                 .post('notificacao', {
@@ -58,6 +58,7 @@ export default function Dashboard() {
                 })
                 .then(resp => {
                   console.log(resp);
+                  resetForm();
                 })
                 .catch(err => {
                   console.error(err);
