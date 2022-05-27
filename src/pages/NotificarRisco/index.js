@@ -113,7 +113,6 @@ export default function Dashboard() {
           headers={{
             Accept: 'application/json',
             ContentType: 'application/json',
-            AccessControlAllowHeaders: 'XMLHttpRequest',
           }}
           debug={false}
         />
