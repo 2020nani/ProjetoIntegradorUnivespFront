@@ -20,7 +20,7 @@ export default function Home() {
   }, [1]);
 
   return (
-    <Container theme="escuro">
+    <Container>
       <Header
         isNotificacao={isNotificacao}
         setIsNotificacao={setIsNotificacao}

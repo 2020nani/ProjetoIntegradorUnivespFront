@@ -11,3 +11,15 @@ export function notificationReceivedSuccess(notification) {
     payload: { notification },
   };
 }
+
+export function isNewReadNotification() {
+  return {
+    type: '@notification/NOTIFICATION_NEW',
+  };
+}
+
+export function readNotification() {
+  return {
+    type: '@notification/NOTIFICATION_READ_SUCCESS',
+  };
+}

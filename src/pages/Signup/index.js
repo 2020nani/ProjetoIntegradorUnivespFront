@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
 import { Container, Conteudo } from './styles';
 import { signUpRequest } from '../../store/modules/auth/actions';
-import logo from '../../assets/imagens/logo.jpg';
+import logo from '../../assets/imagens/logo.png';
 
 const schema = Yup.object().shape({
   name: Yup.string().required('O nome é obrigatório'),
@@ -25,7 +25,7 @@ export default function SignUp() {
       <Conteudo>
         <div>
           <Link to="/">
-            <img src={logo} width="300px" alt="devaria" />
+            <img src={logo} width="60%" alt="devaria" />
           </Link>
           <Formik
             initialValues={{

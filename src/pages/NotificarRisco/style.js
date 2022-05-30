@@ -4,7 +4,7 @@ export const Container = styled.div`
   width: 100vw;
   height: 100vh;
   display: flex;
-  justify-content: ${props => (props.isNotificacao ? 'flex-end' : 'center')};
+  justify-content: center;
   align-items: center;
   background-color: skyblue;
 `;

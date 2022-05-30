@@ -19,7 +19,7 @@ const schema = Yup.object().shape({
     .max(500, 'No maximo 500 caracteres'),
 });
 
-export default function Dashboard() {
+export default function NotificarRisco() {
   const SOCKET_URL = process.env.REACT_APP_SOCKET_URL;
   const [isNotificacao, setIsNotificacao] = useState(false);
   const dispatch = useDispatch();
@@ -29,6 +29,12 @@ export default function Dashboard() {
     'REGIAO_OESTE',
     'REGIAO_LESTE',
   ];
+  function constroiData() {
+    const dia = new Date().toLocaleString();
+
+    return dia.substring(0, 10);
+  }
+  const date = constroiData();
 
   return (
     <>
@@ -36,8 +42,9 @@ export default function Dashboard() {
         isNotificacao={isNotificacao}
         setIsNotificacao={setIsNotificacao}
       />
-      <Container isNotificacao={isNotificacao}>
+      <Container>
         <Conteudo>
+          <h1>Notificar Risco</h1>
           <Formik
             initialValues={{
               cidade: '',
@@ -54,7 +61,7 @@ export default function Dashboard() {
                   regiao: regiao,
                   descricao: descricao,
                   usuarioId: 1,
-                  isRead: false,
+                  isRead: date,
                 })
                 .then(resp => {
                   console.log(resp);
@@ -105,6 +112,12 @@ export default function Dashboard() {
             )}
           </Formik>
         </Conteudo>
+        {isNotificacao && (
+          <Notificacao
+            isNotificacao={isNotificacao}
+            setIsNotificacao={setIsNotificacao}
+          />
+        )}
         <SockJsClient
           url={SOCKET_URL}
           topics={['/topic/message']}
@@ -116,12 +129,6 @@ export default function Dashboard() {
           }}
           debug={false}
         />
-        {isNotificacao && (
-          <Notificacao
-            isNotificacao={isNotificacao}
-            setIsNotificacao={setIsNotificacao}
-          />
-        )}
       </Container>
     </>
   );

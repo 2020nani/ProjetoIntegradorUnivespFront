@@ -13,7 +13,7 @@ width: 100vw;
 max-width: 400px;
 text-align: center;
 @media (max-width:400px) {
-    max-width:300px
+    max-width:80%
   }
 form{
     display: flex;

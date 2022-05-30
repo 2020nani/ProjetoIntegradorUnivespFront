@@ -42,7 +42,7 @@ export function* signUp({ payload }) {
       perfil,
     });
     toast.success('Usuario cadastrado com sucesso');
-    history.push('/login');
+    history.push('/home');
   } catch (err) {
     toast.error('Falha no cadastro verifique seus dados!');
     yield put(signFailure());

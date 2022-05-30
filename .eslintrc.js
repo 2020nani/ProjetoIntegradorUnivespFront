@@ -36,5 +36,7 @@ module.exports = {
     'no-nested-ternary': 0,
     'jsx-a11y/no-static-element-interactions': 0,
     'jsx-a11y/click-events-have-key-events': 0,
+    'react/no-array-index-key': 0,
+    'import/no-named-as-default-member': 0,
   },
 };

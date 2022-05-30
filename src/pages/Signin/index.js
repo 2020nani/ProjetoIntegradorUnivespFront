@@ -5,7 +5,7 @@ import { Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import { Container, Conteudo } from './styles';
 import { signInRequest } from '../../store/modules/auth/actions';
-import logo from '../../assets/imagens/logo.jpg';
+import logo from '../../assets/imagens/logo.png';
 
 const schema = Yup.object().shape({
   email: Yup.string()
@@ -24,7 +24,7 @@ export default function SignIn() {
     <Container>
       <Conteudo>
         <Link to="/">
-          <img src={logo} width="300px" alt="devaria" />
+          <img src={logo} width="60%" alt="logo" />
         </Link>
         <div>
           <Formik
